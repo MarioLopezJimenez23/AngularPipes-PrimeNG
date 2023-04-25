@@ -1,0 +1,65 @@
+<p-panel header="Pipes personalizados" class="p-1">
+    <p>
+      Pipes personalizados - creados por {{'NOSOTROS' | toggleCase:isUpperCase}}
+    </p>
+  </p-panel>
+
+
+  <p-toolbar>
+
+    <div class="p-toolbar-group-start">
+        <p-button   label="ToggleCase" 
+                    icon="pi pi-search" 
+                    class="mr-2"
+                    (click)="toggleUpperCase()"
+        ></p-button>
+    </div>
+
+    <div class="p-toolbar-group-end">
+        
+        <p-button 
+                class="mr-2" 
+                label="Por Nombre" 
+                icon="pi pi-sort" 
+                styleClass="p-button-success mr-2"
+                (onClick)="changeOrder('name')"
+        ></p-button>
+        <p-button 
+                class="mr-2" 
+                label="Por tipo volador" 
+                icon="pi pi-sort" 
+                styleClass="p-button-danger"
+                (onClick)="changeOrder('canFly')"
+            ></p-button>
+        <p-button 
+                class="mr-2" 
+                label="Por color" 
+                icon="pi pi-sort" 
+                styleClass="p-button-help"
+                (onClick)="changeOrder('color')"
+            ></p-button>
+    </div>
+</p-toolbar>
+
+<div class="grid">
+    <div class="col mt-2">
+        <p-panel header="Heroes">
+            <p-table [value]="heroes | sortBy:orderBy" [tableStyle]="{ 'min-width': '50rem' }">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Vuela</th>
+                        <th>Color</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-heroe>
+                    <tr>
+                        <td>{{ heroe.name }}</td>
+                        <td>{{ heroe.canFly | canFly }}</td>
+                        <td>{{ heroe.color }}</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </p-panel>
+    </div>
+</div>
